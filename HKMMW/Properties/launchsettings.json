@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "HKMMW (Unpackaged)": {
+        "commandName": "Project"
+      },
+      "HKMMW (Package)": {
+        "commandName": "MsixPackage"
+      }
+    }
+}

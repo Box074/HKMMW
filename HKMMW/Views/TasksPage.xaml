@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="HKMMW.Views.TasksPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:ctask="using:HKMMW.Core.Contracts.Tasks" 
+    xmlns:helpers="using:HKMMW.Helpers"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <helpers:TaskMessageTypeToBrush x:Key="TaskMessageTypeToBrush" />
+    </Page.Resources>
+    <Grid x:Name="ContentArea">
+        <ListView HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch"
+                  SelectionMode="None"
+                  ItemsSource="{x:Bind ViewModel.tasks}"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="ctask:ITaskItem">
+                    <Expander HorizontalAlignment="Stretch" MinHeight="56" HorizontalContentAlignment="Stretch" >
+                        <Expander.Header>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                                <FontIcon Glyph="&#xE8A5;" VerticalAlignment="Center" 
+                                          HorizontalAlignment="Left" Width="54" Height="54"
+                                          Visibility="{x:Bind IsRunning, Mode=OneWay}"/>
+                                
+                                <FontIcon Glyph="&#xE783;" Width="54" Height="54" VerticalAlignment="Center" 
+                                          HorizontalAlignment="Left" 
+                                          Visibility="{x:Bind IsError, Mode=OneWay}" 
+                                          Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+
+                                <FontIcon Glyph="&#xE73E;" Width="54" Height="54" VerticalAlignment="Center" 
+                                          HorizontalAlignment="Left" 
+                                          Visibility="{x:Bind IsSucceeded, Mode=OneWay}" 
+                                          Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
+                                
+                                <TextBlock Text="{x:Bind Name, Mode=OneWay}" 
+                                           VerticalAlignment="Center" 
+                                           Margin="60, 0, 0, 0" 
+                                           MaxWidth="180"
+                                           HorizontalAlignment="Left"
+                                           TextTrimming="CharacterEllipsis" TextAlignment="Left"/>
+                                <ProgressBar IsIndeterminate="{x:Bind ProgressIndeterminate, Mode=OneWay}" 
+                                             ShowError="{x:Bind IsError, Mode=OneWay}" 
+                                     VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                             Margin="260, 0, 0, 0 " Value="{x:Bind Progress, Mode=OneWay}"/>
+                            </Grid>
+                        </Expander.Header>
+                        
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>
+                                    <Bold>GUID:</Bold>
+                                </TextBlock>
+                                <TextBlock Text="{x:Bind GUID}" IsTextSelectionEnabled="True"/>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalAlignment="Stretch" MaxHeight="450" MinHeight="140"
+                                      Margin="0, 16, 0, 16"
+                                      Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
+                                <ItemsRepeater  ItemsSource="{x:Bind Messages}"
+                                      >
+                                    <DataTemplate x:DataType="ctask:TaskMessage">
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                              >
+                                            <TextBlock Text="{x:Bind Text}"
+                                                   IsTextSelectionEnabled="True"
+                                                   TextWrapping="WrapWholeWords"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="0,0,0,0"
+                                                   Foreground="{x:Bind Type, Converter={StaticResource TaskMessageTypeToBrush}}"
+                                                   />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsRepeater>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Expander>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </Grid>
+</Page>
