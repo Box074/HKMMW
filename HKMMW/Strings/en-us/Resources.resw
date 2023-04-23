@@ -147,4 +147,13 @@
   <data name="Shell_MAPIManage.Content" xml:space="preserve">
     <value>MAPI</value>
   </data>
+  <data name="ModInfo_Name.Text" xml:space="preserve">
+    <value>Name: </value>
+  </data>
+  <data name="ModInfo_Size" xml:space="preserve">
+    <value>Size: </value>
+  </data>
+  <data name="ModInfo_Version.Text" xml:space="preserve">
+    <value>Version: </value>
+  </data>
 </root>

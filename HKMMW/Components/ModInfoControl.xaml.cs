@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using HKMMW.Core.Contracts.ModData;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -20,10 +22,20 @@ using Windows.Foundation.Collections;
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace HKMMW.Components;
-public sealed partial class ModInfoControl : UserControl
+public sealed partial class ModInfoControl : UserControl, INotifyPropertyChanged
 {
+    public IModInfo? Mod
+    {
+        get; set;
+    }
+    public IModInfoDownloadable? AsDownloadable => Mod as IModInfoDownloadable;
+    public bool IsLocal => Mod is IModInfoLocal;
+    public bool IsDownloadable => Mod is IModInfoDownloadable downloadable && downloadable.ModSize > 0;
+    public bool IsVerifiable => Mod is IModInfoVerifiable;
     public ModInfoControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }

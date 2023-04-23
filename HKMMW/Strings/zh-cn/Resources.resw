@@ -123,6 +123,15 @@
   <data name="AppDisplayName" xml:space="preserve">
     <value>Hollow Knight Mod Manager</value>
   </data>
+  <data name="ModInfo_Name.Text" xml:space="preserve">
+    <value>名称：</value>
+  </data>
+  <data name="ModInfo_Size" xml:space="preserve">
+    <value>大小：</value>
+  </data>
+  <data name="ModInfo_Version.Text" xml:space="preserve">
+    <value>版本：</value>
+  </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>主题</value>
   </data>

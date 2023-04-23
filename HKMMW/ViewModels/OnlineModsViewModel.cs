@@ -2,26 +2,31 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using HKMMW.Core.Contracts.ModData;
 using HKMMW.Core.Contracts.Services;
+using HKMMW.Helpers;
+using Microsoft.UI.Xaml;
 
 namespace HKMMW.ViewModels;
 
 public class OnlineModsViewModel : ObservableRecipient
 {
-    public ObservableCollection<IModInfo> mods = new();
+    public IEnumerable<IModInfo>? mods;
     private readonly IModLinksModInfoProvideService modlinks;
-    public OnlineModsViewModel(IModLinksModInfoProvideService modLinksModInfoProvideService)
+    private readonly ITaskService taskService;
+    public OnlineModsViewModel(IModLinksModInfoProvideService modLinksModInfoProvideService,
+            ITaskService taskService)
     {
         modlinks = modLinksModInfoProvideService;
+        this.taskService = taskService;
 
-        _ = RefreshModInfos();
+        RefreshModInfos().RecordError();
     }
 
     public async Task RefreshModInfos()
     {
-        mods.Clear();
-        foreach (var mod in await modlinks.GetLatestModInfos())
+        var results = await modlinks.GetLatestModInfos();
+        taskService.AppContext.Post(_ =>
         {
-            mods.Add(mod);
-        }
+            SetProperty(ref mods, results, nameof(mods));
+        }, null);
     }
 }

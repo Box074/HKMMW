@@ -76,20 +76,20 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
-            services.AddTransient<MAPIManageViewModel>();
-            services.AddTransient<MAPIManagePage>();
-            services.AddTransient<SettingsViewModel>();
-            services.AddTransient<SettingsPage>();
-            services.AddTransient<TasksViewModel>();
-            services.AddTransient<TasksPage>();
-            services.AddTransient<ModGroupsViewModel>();
-            services.AddTransient<ModGroupsPage>();
-            services.AddTransient<OnlineModsViewModel>();
-            services.AddTransient<OnlineModsPage>();
-            services.AddTransient<LocalModsViewModel>();
-            services.AddTransient<LocalModsPage>();
-            services.AddTransient<ShellPage>();
-            services.AddTransient<ShellViewModel>();
+            services.AddSingleton<MAPIManageViewModel>();
+            services.AddSingleton<MAPIManagePage>();
+            services.AddSingleton<SettingsViewModel>();
+            services.AddSingleton<SettingsPage>();
+            services.AddSingleton<TasksViewModel>();
+            services.AddSingleton<TasksPage>();
+            services.AddSingleton<ModGroupsViewModel>();
+            services.AddSingleton<ModGroupsPage>();
+            services.AddSingleton<OnlineModsViewModel>();
+            services.AddSingleton<OnlineModsPage>();
+            services.AddSingleton<LocalModsViewModel>();
+            services.AddSingleton<LocalModsPage>();
+            services.AddSingleton<ShellPage>();
+            services.AddSingleton<ShellViewModel>();
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));

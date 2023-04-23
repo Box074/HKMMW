@@ -10,5 +10,10 @@ public interface IModInfoDownloadable : IModInfo
     {
         get;
     }
+    long ModSize
+    {
+        get;
+    }
+    
     string HashType => "sha256";
 }

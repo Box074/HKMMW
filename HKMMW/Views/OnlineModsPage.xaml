@@ -5,16 +5,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mcd="using:HKMMW.Core.Contracts.ModData"
+    xmlns:helpers="using:HKMMW.Helpers"
+    xmlns:cs="using:HKMMW.Components"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <helpers:SizeToStringConverter x:Key="SizeToStringConverter" />
+    </Page.Resources>
     <Grid x:Name="ContentArea">
         <ListView
-            HorizontalAlignment="Stretch"
-            ItemsSource="{x:Bind ViewModel.mods, Mode=OneWay}"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch"
+                  SelectionMode="None"
+                  ItemsSource="{x:Bind ViewModel.mods, Mode=OneWay}"
             >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="mcd:IModInfo">
-                    <TextBlock Text="{x:Bind Name}"></TextBlock>
+                    <cs:ModInfoControl Mod="{x:Bind TargetNullValue=}"
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

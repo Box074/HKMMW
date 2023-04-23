@@ -29,4 +29,6 @@ public interface IModInfo
     }
 
     bool IsLocal => this is IModInfoLocal;
+    bool IsDownloadable => this is IModInfoDownloadable downloadable && downloadable.ModSize > 0;
+    bool IsVerifiable => this is IModInfoVerifiable;
 }

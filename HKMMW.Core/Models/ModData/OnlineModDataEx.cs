@@ -38,7 +38,7 @@ public class OnlineModDataEx : IModInfo, IModInfoDownloadable
     {
         get; set;
     }
-    public Version Version => new(VerString);
+    public Version Version => Version.TryParse(VerString, out var result) ? result : new();
 
     public string ModId => Name;
 
@@ -67,4 +67,6 @@ public class OnlineModDataEx : IModInfo, IModInfoDownloadable
     {
         get; set;
     } = new();
+
+    public long ModSize => Files.ModSize;
 }

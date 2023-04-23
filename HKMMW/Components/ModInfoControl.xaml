@@ -8,9 +8,45 @@
     xmlns:local="using:HKMMW.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
     mc:Ignorable="d">
+    <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
+        <Expander.Header>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Bind Mod.DisplayName}" />
+            </StackPanel>
+        </Expander.Header>
 
-    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Name: " x:Uid="ModInfo_Name"/>
+                <TextBlock Text="{x:Bind Mod.DisplayName}" IsTextSelectionEnabled="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="ModID: " x:Uid="ModInfo_ModID"/>
+                <TextBlock Text="{x:Bind Mod.ModId}" IsTextSelectionEnabled="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Version: " x:Uid="ModInfo_Version"/>
+                <TextBlock Text="{x:Bind Mod.Version}" IsTextSelectionEnabled="True"/>
+            </StackPanel>
 
-    </Grid>
+            <StackPanel Visibility="{x:Bind IsDownloadable}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Size: " x:Uid="ModInfo_Size"/>
+                    <TextBlock Text="{Binding ModSize, Converter={StaticResource SizeToStringConverter}}" 
+                                               IsTextSelectionEnabled="True"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Download URL: " x:Uid="ModInfo_DURL"/>
+                    <RichTextBlock>
+                        <Paragraph>
+                            <Hyperlink NavigateUri="{x:Bind AsDownloadable.DownloadLink}" Inlines="{x:Bind AsDownloadable.DownloadLink}"/>
+                        </Paragraph>
+                    </RichTextBlock>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </Expander>
 </UserControl>
